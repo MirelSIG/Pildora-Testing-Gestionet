@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catálogo de Herramientas de Testing - Formación Gamificada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Catálogo Profesional de Herramientas de Testing de Mayor uso</h1>
+    <h2>Aplicado a productos de formación telemática con recursos audiovisuales interactivos</h2>
+    <p class="tagline">Departamento de Prácticas QA · Edición 2026</p>
+  </header>
+
+  <main>
+    <!-- 1. Introducción -->
+    <section id="introduccion">
+      <h3>1. Introducción</h3>
+      <p>
+        Este documento recoge las principales herramientas de testing utilizadas en el desarrollo
+        de productos de formación empresarial telemática con recursos audiovisuales interactivos.
+      </p>
+      <p>Principales herramientas de testing a explorar en esta jornada:</p>
+      <ul>
+        <li>PHPUnit, Pest PHP, Codeception y Selenium WebDriver para testing en PHP/Symfony.</li>
+        <li>Vitest, Vue Testing Library, Cypress y Playwright para testing en Vue.js.</li>
+        <li>Jest y DOM Testing Library para testing de lógica e interfaz en JavaScript.</li>
+        <li>Navicat, utPLSQL, pgTAP y tSQLt para validación y testing en bases de datos.</li>
+      </ul>
+      <p>Los productos requieren testing continuo en:</p>
+      <ul>
+        <li>Interactividad y gamificación.</li>
+        <li>Animaciones y recursos audiovisuales.</li>
+        <li>Compatibilidad entre navegadores y dispositivos.</li>
+        <li>Rendimiento y estabilidad.</li>
+        <li>Integración backend–frontend.</li>
+        <li>Validación de datos, estados y progreso del usuario.</li>
+      </ul>
+    </section>
+
+    <!-- 2. Testing PHP Simphony -->
+    <section id="php-simphony">
+      <h3>2. Testing para PHP Simphony (backend de la plataforma)</h3>
+      <p>Symfony es un framework que permite construir aplicaciones web en PHP.
+        En una empresa, el backend (la parte que procesa datos, reglas y APIs) debe ser estable, seguro y predecible.
+        Para garantizarlo, se utilizan herramientas de testing automatizado, que ejecutan pruebas sin intervención humana.
+
+        A continuación se explican las herramientas más usadas, desde las más básicas hasta las más avanzadas.</p>
+
+      <h4>2.1. PHPUnit</h4>
+      <p><strong>Qué es:</strong> PHPUnit es la herramienta estándar para hacer pruebas en PHP.
+        Piensa en PHPUnit como un “robot” que ejecuta pequeñas funciones del sistema y comprueba que devuelven lo que deberían.</p>
+      <p><strong>Uso en la empresa:</strong> Validación de lógica de negocio, APIs internas, controladores y servicios.</p>
+      <p><strong>Ventajas:</strong></p>
+      <ul>
+        <li>Estándar en PHP: todas las empresas lo conocen.</li>
+        <li>Ideal para estabilidad: detecta errores antes de que lleguen a producción.</li>
+        <li>Perfecto para CI/CD: se integra fácilmente en pipelines automáticos.</li>
+      </ul>
+      <p><strong>Desventajas:</strong></p>
+      <ul>
+        <li>Verboso: escribir tests complejos puede requerir mucho código.</li>
+        <li>No cubre UI: no sirve para probar pantallas, botones o animaciones.</li>
+      </ul>
+
+      <h4>2.2. Pest PHP</h4>
+      <p><strong>Qué es:</strong> Pest es una alternativa moderna a PHPUnit.
+        Hace lo mismo, pero con una sintaxis más simple y fácil de leer.
+
+        Piensa en Pest como una versión “minimalista” de PHPUnit.</p>
+      <p><strong>Uso en la empresa:</strong> Testing rápido y legible para módulos Simphony.</p>
+       <p>Ideal para equipos que quieren escribir tests sin tanta complejidad.</p>
+      <p><strong>Ventajas:</strong></p>
+      <ul>
+        <li><strong>Sintaxis clara</strong>: los tests parecen frases, no bloques de código complicados.</li>
+        <li><strong>Minimalista</strong>: menos ruido, más enfoque en lo importante.</li>
+        <li><strong>Perfecto para proyectos nuevos</strong>: se empieza más rápido.</li>
+      </ul>
+      <p><strong>Desventajas:</strong></p>
+      <ul>
+        <li><strong>Comunidad más joven que PHPUnit</strong>: menos documentación y ejemplos que PHPUnit.</li>
+      </ul>
+
+      <h4>2.3. Codeception</h4>
+      <p><strong>Tipo:</strong> E2E, API, integración</p>
+      <p><strong>Qué es:</strong>Codeception es un framework de testing “todo en uno”.
+        Permite probar <strong>todo el sistema completo</strong>, desde el backend hasta el frontend</p>
+      <p>Imagina que Codeception es un “tester profesional” que puede:</p>
+      <ul>
+        <li>enviar peticiones a APIs,</li>
+        <li>simular usuarios navegando,</li>
+        <li>probar bases de datos,</li>
+        <li>ejecutar flujos completos.</li>
+      </ul>
+      <p><strong>Uso en la empresa:</strong> </p>
+      <ul>
+        <li>Testing de <strong>flujos completos</strong> entre backend y frontend.</li>
+        <li>Validación de procesos gamificados con varias capas (API + UI + lógica).</li>
+      </ul>
+      <p><strong>Ventajas:</strong></p>
+      <ul>
+        <li>Framework <strong>“todo en uno”</strong> (API, UI, integración).</li>
+        <li><strong>Compatible con Selenium y Playwright</strong>: puede controlar navegadores reales, donde hay muchas interacciones.</li>
+        <li><strong>Ideal para plataformas gamificadas con múltiples capas (Complejas)</strong>donde hay muchas interacciones.</li>
+      </ul>
+      <p><strong>Desventajas:</strong></p>
+      <ul>
+        <li><strong>Configuración avanzada</strong>: requiere más tiempo y conocimiento.</li>
+      </ul>
+
+      <h4>2.4. Selenium WebDriver</h4>
+      <p><strong>Tipo:</strong> Automatización de UI (End-to-End)</p>
+      <p><strong>Qué es:</strong> Selenium es una herramienta que controla un navegador real (Chrome, Firefox, etc.) como si fuera un usuario humano.</p>
+      <p>Puede:</p>
+      <ul>
+        <li>hacer clic,</li>
+        <li>escribir,</li>
+        <li>mover el ratón,</li>
+        <li>cambiar de pestaña,</li>
+        <li>interactuar con animaciones, videos y elementos visuales.</li>
+      </ul>
+      <p><strong>Uso en la empresa:</strong> </p>
+      <ul>
+        <li>Testing de <strong>interfaces Complejas,</strong> animaciones y contenido audiovisual.</li>
+        <li>Validación de experiencias gamificadas donde la interacción es clave.</li>
+      </ul>
+      <p><strong>Ventajas:</strong></p>
+      <ul>
+        <li><strong>Estándar de la industria</strong>: usado por empresas grandes.</li>
+        <li><strong>Multinavegador</strong>: funciona en Chrome, Firefox, Edge, Safari.</li>
+        <li><strong>Control total del navegador</strong>: múltiples pestañas, iframes, ventanas.</li>
+        <li><strong>Integrable con Codeception</strong> y otros frameworks, complementandose muy bien.</li>
+      </ul>
+      <p><strong>Desventajas:</strong></p>
+      <ul>
+        <li><strong> Configuración más compleja que Cypress o Playwright</strong> : requiere instalar drivers y configurarlos.</li>
+        <li><strong> Scripts más verbosos para perfiles junior</strong>: mas código para hacer cosas simples.</li>
+        <li><strong>Depende de drivers externos</strong>:ChromeDriver, GeckoDriver, etc.</li>
+      </ul>
+    </section>
+
+    <!-- 3. Testing Vue -->
+<section id="vue">
+  <h3>3. Testing para Vue.js (frontend interactivo)</h3>
+
+  <p>
+    Vue.js es una tecnología que permite construir la parte visual de una aplicación web:
+    botones, animaciones, pantallas, formularios, juegos y cualquier elemento con el que el usuario interactúa.
+    En productos de formación gamificada, esta parte es esencial: el alumno hace clic, avanza,
+    desbloquea contenido, gana puntos y recibe retroalimentación visual.
+  </p>
+
+  <p>
+    Para asegurarnos de que todo esto funciona correctamente, usamos herramientas de testing automatizado.
+    Estas herramientas simulan usuarios, acciones y situaciones reales, comprobando que la interfaz responde
+    como debería.
+  </p>
+
+  <h4>3.1. Vitest</h4>
+  <p><strong>Tipo:</strong> Unit & Integration</p>
+
+  <p>
+    <strong>Qué es:</strong> Vitest es una herramienta que prueba pequeñas partes de la interfaz de forma rápida.
+    Imagina un robot que revisa cada botón, cada cálculo y cada reacción del sistema para asegurarse de que
+    todo funciona como se espera.
+  </p>
+
+  <h4>¿Qué significa testing unitario en Vue?</h4>
+  <p>Probar una pieza pequeña del sistema, como:</p>
+  <ul>
+    <li>Un botón que suma puntos.</li>
+    <li>Un componente que muestra una tarjeta.</li>
+    <li>Una función que calcula el nivel del usuario.</li>
+  </ul>
+  <p>Es como revisar un ladrillo individual de una pared.</p>
+
+  <h4>¿Qué significa testing de integración en Vue?</h4>
+  <p>Probar varias piezas juntas, por ejemplo:</p>
+  <ul>
+    <li>Un formulario que actualiza el progreso del alumno.</li>
+    <li>Una pantalla que combina animaciones y datos.</li>
+    <li>Un componente que depende de otro para funcionar.</li>
+  </ul>
+  <p>Es como comprobar cómo encajan varios ladrillos entre sí.</p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de componentes interactivos.</li>
+    <li>Validación de lógica de gamificación (puntos, niveles, recompensas).</li>
+    <li>Comprobación de estados (clics, avance, retroceso).</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Muy rápido.</li>
+    <li>Perfecto para Vue.</li>
+    <li>Ideal para lógica interna.</li>
+  </ul>
+
+  <h4>3.2. Vue Testing Library</h4>
+  <p><strong>Tipo:</strong> Unit & Integration</p>
+
+  <p>
+    <strong>Qué es:</strong> Vue Testing Library prueba componentes como si fueran usados por una persona real.
+    En lugar de centrarse en el código, se centra en cómo se ve y cómo se usa la interfaz.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de comportamiento real.</li>
+    <li>Validación de interacciones (clics, escritura, selección).</li>
+    <li>Comprobación de accesibilidad.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Simula el uso real del usuario.</li>
+    <li>Compatible con Vitest.</li>
+    <li>Ideal para componentes visuales.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Más lento que Vitest.</li>
+    <li>Menos control interno del código.</li>
+  </ul>
+
+  <h4>3.3. Cypress</h4>
+  <p><strong>Tipo:</strong> End-to-End</p>
+
+  <p>
+    <strong>Qué es:</strong> Cypress abre un navegador real y simula un usuario completo:
+    navega, hace clic, escribe, espera animaciones y comprueba que todo funciona como en producción.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de flujos completos.</li>
+    <li>Validación de interacciones reales.</li>
+    <li>Detección de errores visuales.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Debug visual.</li>
+    <li>Ideal para E2E.</li>
+    <li>Detecta errores reales.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Más lento que Vitest.</li>
+    <li>Limitaciones con múltiples pestañas.</li>
+  </ul>
+
+  <h4>3.4. Playwright</h4>
+  <p><strong>Tipo:</strong> End-to-End avanzado</p>
+
+  <p>
+    <strong>Qué es:</strong> Playwright es similar a Cypress, pero más potente.
+    Permite probar varios navegadores, dispositivos, pestañas y ventanas.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de interfaces complejas.</li>
+    <li>Validación en distintos dispositivos.</li>
+    <li>Pruebas de rendimiento.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Multinavegador real.</li>
+    <li>Muy rápido y estable.</li>
+    <li>Perfecto para escenarios avanzados.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Más técnico.</li>
+    <li>Configuración avanzada.</li>
+  </ul>
+</section>
+
+
+    <!-- 4. Testing JS -->
+   <section id="javascript">
+  <h3>4. Testing para JavaScript (lógica interactiva)</h3>
+
+  <p>
+    JavaScript es el lenguaje que controla la lógica interactiva de una aplicación web:
+    animaciones, botones, cálculos, estados, temporizadores y cualquier acción que ocurre
+    cuando el usuario interactúa con la pantalla.
+  </p>
+
+  <h4>4.1. Jest</h4>
+  <p><strong>Tipo:</strong> Unit testing</p>
+
+  <p>
+    <strong>Qué es:</strong> Jest es una herramienta que prueba funciones y lógica interna.
+    Imagina un robot que revisa cada cálculo, cada regla y cada decisión que toma el sistema.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de funciones internas.</li>
+    <li>Validación de cálculos de gamificación.</li>
+    <li>Comprobación de estados y reglas.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Muy maduro.</li>
+    <li>Gran comunidad.</li>
+    <li>Ideal para lógica interna.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Más lento que Vitest.</li>
+  </ul>
+
+  <h4>4.2. DOM Testing Library</h4>
+  <p><strong>Tipo:</strong> Unit/Integration</p>
+
+  <p>
+    <strong>Qué es:</strong> DOM Testing Library prueba cómo se comporta la interfaz desde el punto de vista del usuario.
+    Se centra en accesibilidad, interacción y experiencia real.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de accesibilidad.</li>
+    <li>Validación de comportamiento visual.</li>
+    <li>Simulación de interacciones reales.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Enfoque en UX.</li>
+    <li>Compatible con Jest y Vitest.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>No cubre E2E.</li>
+  </ul>
+</section>
+
+    <!-- 5. Bases de datos -->
+    <section id="bases-datos">
+  <h3>5. Testing para Bases de Datos (Navicat y frameworks SQL)</h3>
+
+  <p>
+    Las bases de datos almacenan toda la información importante:
+    progreso del alumno, puntuaciones, módulos completados, estadísticas y contenido.
+    Probar una base de datos significa asegurarse de que los datos se guardan, se leen y se actualizan correctamente.
+  </p>
+
+  <h4>5.1. Navicat</h4>
+  <p><strong>Tipo:</strong> Validación manual y automatización ligera</p>
+
+  <p>
+    <strong>Qué es:</strong> Navicat es una herramienta visual que permite ver y editar bases de datos.
+    Es como un panel de control donde puedes comprobar que los datos están bien guardados.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Validación manual de datos.</li>
+    <li>Comprobación de integridad.</li>
+    <li>Revisión de tablas y registros.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Muy fácil de usar.</li>
+    <li>Ideal para QA manual.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>No automatiza tests unitarios.</li>
+  </ul>
+
+  <h4>5.2. utPLSQL / pgTAP / tSQLt</h4>
+  <p><strong>Tipo:</strong> Unit testing SQL</p>
+
+  <p>
+    <strong>Qué son:</strong> Son herramientas que permiten probar funciones internas de la base de datos.
+    Imagina que la base de datos también tiene “pequeños robots” que realizan cálculos y validaciones.
+    Estas herramientas prueban que esos robots funcionan bien.
+  </p>
+
+  <p><strong>Uso en la empresa:</strong></p>
+  <ul>
+    <li>Testing de funciones SQL.</li>
+    <li>Validación de triggers.</li>
+    <li>Comprobación de reglas internas.</li>
+  </ul>
+
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Testing profundo.</li>
+    <li>Ideal para bases de datos complejas.</li>
+  </ul>
+
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Requiere scripting avanzado.</li>
+  </ul>
+</section>
+
+    <!-- 6. Conclusión -->
+    <section id="conclusion">
+      <h3>6. Conclusión</h3>
+      <p>
+        El testing es una parte esencial del desarrollo de productos de formación gamificada.
+        Cada herramienta tiene su propósito y su lugar en el flujo de trabajo.
+        La combinación adecuada de estas herramientas garantiza que los productos sean estables,
+        interactivos y satisfactorios para los usuarios finales.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Departamento de Prácticas QA. Todos los derechos reservados.</p>
+  </footer>
