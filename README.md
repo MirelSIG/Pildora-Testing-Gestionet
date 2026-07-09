@@ -2,10 +2,9 @@
 
 ## Descripcion del proyecto
 
-Este repositorio contiene una pildora formativa centrada en herramientas de testing utilizadas en entornos profesionales. El contenido esta orientado a productos de formacion telematica con recursos audiovisuales interactivos, donde la calidad no depende solo de que el codigo funcione, sino tambien de que la experiencia del usuario sea estable, accesible y consistente.
+Este repositorio reúne una píldora formativa especializada en las herramientas de testing empleadas en entornos profesionales, alineada con los estándares de calidad y los procesos de aseguramiento propios de Gestionet. Está relacionado con soluciones de formación telemática con recursos audiovisuales interactivos, donde la excelencia no se mide únicamente por el correcto funcionamiento del código, sino por la estabilidad, accesibilidad y consistencia de la experiencia de usuario.
 
-La pagina principal del proyecto presenta un catalogo explicativo de herramientas de testing habituales en equipos QA y de desarrollo. El enfoque combina backend, frontend, logica de interaccion y validacion de datos, de forma que el material pueda servir como apoyo didactico, resumen tecnico o base para una exposicion.
-
+El contenido ofrece una visión estructurada y estratégica del catálogo de herramientas de testing utilizadas por los equipos de QA y desarrollo en general, y por supuesto, de Gestionet, abarcando prácticas de validación en backend, frontend, lógica de interacción y control de datos. Este material está concebido como un recurso corporativo de apoyo, útil tanto para la capacitación interna como para la contextualización técnica de las prácticas profesionales del Bootcamp en Desarrollo Web Fullstack de Peñascal F5, reforzando la comprensión del propósito social y tecnológico que define la actividad de Gestionet.
 La introduccion del contenido aborda de forma resumida los principales bloques de aprendizaje de la pildora:
 
 - Introduccion al testing aplicado a productos de formacion telematica interactiva.

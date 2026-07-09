@@ -126,3 +126,27 @@ table tr:hover {
   background-color: #f0f3fa;
   transition: background-color 0.2s ease-in-out;
 }
+
+.demo-block {
+  margin-top: 14px;
+  border: 1px solid #d7deef;
+  border-radius: 8px;
+  background: #f7f9ff;
+  padding: 12px;
+}
+
+.demo-block h4 {
+  margin-top: 0;
+  color: #17325f;
+}
+
+.demo-code {
+  margin: 0;
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 6px;
+  padding: 12px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.45;
+}

@@ -139,6 +139,24 @@
         <li><strong> Scripts más verbosos para perfiles junior</strong>: mas código para hacer cosas simples.</li>
         <li><strong>Depende de drivers externos</strong>:ChromeDriver, GeckoDriver, etc.</li>
       </ul>
+
+      <div class="demo-block">
+        <h4>Demo de código (PHP/Symfony con PHPUnit)</h4>
+        <pre class="demo-code"><code>// tests/Service/ScoreServiceTest.php
+use PHPUnit\Framework\TestCase;
+
+final class ScoreServiceTest extends TestCase
+{
+    public function testCalculaPuntosPorAciertos(): void
+    {
+        $service = new ScoreService();
+
+        $puntos = $service-&gt;calcular(8, 10);
+
+        $this-&gt;assertSame(80, $puntos);
+    }
+}</code></pre>
+      </div>
     </section>
 
     <!-- 3. Testing Vue -->
@@ -282,6 +300,22 @@
     <li>Más técnico.</li>
     <li>Configuración avanzada.</li>
   </ul>
+
+  <div class="demo-block">
+    <h4>Demo de código (Vue con Vitest + Vue Testing Library)</h4>
+    <pre class="demo-code"><code>// QuizCard.test.js
+import { render, screen } from '@testing-library/vue';
+import { describe, it, expect } from 'vitest';
+import QuizCard from './QuizCard.vue';
+
+describe('QuizCard', () =&gt; {
+  it('muestra el progreso actual', () =&gt; {
+    render(QuizCard, { props: { progreso: 60 } });
+
+    expect(screen.getByText('Progreso: 60%')).toBeInTheDocument();
+  });
+});</code></pre>
+  </div>
 </section>
 
 
@@ -347,6 +381,20 @@
   <ul>
     <li>No cubre E2E.</li>
   </ul>
+
+  <div class="demo-block">
+    <h4>Demo de código (JavaScript con Jest)</h4>
+    <pre class="demo-code"><code>// score.test.js
+import { calcularNivel } from './score';
+
+test('asigna nivel Oro con 1000 puntos o más', () =&gt; {
+  expect(calcularNivel(1200)).toBe('Oro');
+});
+
+test('asigna nivel Bronce por debajo de 500 puntos', () =&gt; {
+  expect(calcularNivel(320)).toBe('Bronce');
+});</code></pre>
+  </div>
 </section>
 
     <!-- 5. Bases de datos -->
@@ -411,6 +459,25 @@
   <ul>
     <li>Requiere scripting avanzado.</li>
   </ul>
+
+  <div class="demo-block">
+    <h4>Demo de código (Base de datos con pgTAP)</h4>
+    <pre class="demo-code"><code>-- tests/progreso_usuario_test.sql
+SELECT plan(2);
+
+SELECT is(
+  (SELECT puntos_totales FROM progreso_usuario WHERE usuario_id = 10),
+  950,
+  'El usuario 10 conserva sus puntos esperados'
+);
+
+SELECT ok(
+  EXISTS(SELECT 1 FROM progreso_usuario WHERE modulo_id = 4),
+  'Existe progreso registrado para el módulo 4'
+);
+
+SELECT * FROM finish();</code></pre>
+  </div>
 </section>
 
     <!-- 6. Conclusión -->
@@ -428,3 +495,5 @@
   <footer>
     <p>&copy; 2026 Departamento de Prácticas QA. Todos los derechos reservados.</p>
   </footer>
+ </body>
+ </html>
