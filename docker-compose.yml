@@ -1,0 +1,30 @@
+services:
+  demo-playwright:
+    build:
+      context: ./demo-playwright
+      dockerfile: Dockerfile
+    container_name: gestionet-demo-playwright
+    environment:
+      PORT: 4173
+      DB_PATH: /data/gestionet_demo.db
+    ports:
+      - "4173:4173"
+    volumes:
+      - gestionet_demo_data:/data
+    restart: unless-stopped
+
+  demo-playwright-tests:
+    profiles: ["tests"]
+    build:
+      context: ./demo-playwright
+      dockerfile: Dockerfile.tests
+    environment:
+      CI: "1"
+      DB_PATH: /tmp/gestionet_demo.db
+    command: npm test
+    volumes:
+      - ./demo-playwright/playwright-report:/app/playwright-report
+      - ./demo-playwright/test-results:/app/test-results
+
+volumes:
+  gestionet_demo_data:

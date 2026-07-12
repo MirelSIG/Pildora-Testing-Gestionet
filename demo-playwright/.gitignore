@@ -1,0 +1,5 @@
+node_modules/
+test-results/
+playwright-report/
+db/gestionet_demo.db
+db/gestionet_demo.db-*

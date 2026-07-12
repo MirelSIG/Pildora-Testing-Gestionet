@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Curso Interactivo Gamificado - Demo Gestionet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Modulo: Fundamentos de Testing</h1>
+    <p>Curso interactivo gamificado - Demo Playwright + Claude Code</p>
+  </header>
+
+  <main>
+    <section id="pantalla-login">
+      <label for="input-usuario">Nombre de alumno</label>
+      <input id="input-usuario" type="text" placeholder="ej. ana.garcia" data-testid="input-usuario" />
+      <button id="btn-empezar" data-testid="btn-empezar">Empezar quiz</button>
+    </section>
+
+    <section id="pantalla-quiz" hidden>
+      <div class="progreso-bar-wrapper">
+        <div id="progreso-bar" class="progreso-bar" data-testid="progreso-bar"></div>
+      </div>
+      <p data-testid="contador-preguntas">Pregunta <span id="num-pregunta">1</span> de <span id="total-preguntas">3</span></p>
+
+      <h2 id="texto-pregunta" data-testid="texto-pregunta"></h2>
+      <div id="opciones" data-testid="opciones"></div>
+
+      <p id="puntos-actuales" data-testid="puntos-actuales">Puntos: 0</p>
+    </section>
+
+    <section id="pantalla-resultado" hidden>
+      <h2>Quiz completado</h2>
+      <p id="resultado-puntos" data-testid="resultado-puntos"></p>
+      <p id="resultado-badge" data-testid="resultado-badge" class="badge"></p>
+      <button id="btn-reiniciar" data-testid="btn-reiniciar">Repetir quiz</button>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
