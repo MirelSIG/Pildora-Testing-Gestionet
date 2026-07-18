@@ -17,6 +17,6 @@ test('Login con user normal', async ({ normalUser, page }) => {
 
   // Valida que un usuario normal entra en el campus, no en admin
   await expect(page).toHaveURL(
-    'https://dev-easylearning.gestionetdev.com/campus/section/mi-formacion'
+    '/campus/section/mi-formacion'
   );
 });

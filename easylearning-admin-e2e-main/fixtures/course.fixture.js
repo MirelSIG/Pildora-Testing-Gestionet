@@ -4,7 +4,7 @@ export const courseFixtures = userFixtures.extend({
   cursoName: async ({ page, adminUser }, use) => {
     const nombreCurso = `Curso Playwright ${Date.now()}`;
 
-    await page.goto('https://dev-easylearning.gestionetdev.com/admin');
+    await page.goto('/admin');
     await page.getByRole('link', { name: 'Cursos', exact: true }).click();
     await page.getByRole('button', { name: 'Crear curso' }).click();
 

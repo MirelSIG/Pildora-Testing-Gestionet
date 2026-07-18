@@ -11,7 +11,7 @@ test("Crear usuario único y borrarlo", async ({ adminUser, page }) => {
   const usuarioEmail = `playwright_${timestamp}@usuario.com`;
   const usuarioNombre = `Playwright_${timestamp}`;
   await page.goto(
-    "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&submenuIndex=0"
+    "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&submenuIndex=0"
   );
 
   // 🔹 Crear usuario

@@ -7,7 +7,7 @@ const test = userFixtures;
 test("Modificar usuario existente", async ({ adminUser, page }) => {
   const usuarioNombre = "playwright777@user.com";
   const listaUrl =
-    "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0";
+    "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0";
 
   await page.goto(listaUrl, { waitUntil: "networkidle" });
   await page.waitForSelector("table");

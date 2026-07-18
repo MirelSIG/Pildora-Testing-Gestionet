@@ -6,7 +6,7 @@ const test = userFixtures;
 
 test("Crear itinerario y borrar", async ({ adminUser, page }) => {
   await page.goto(
-    "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CItineraryCrudController&entityFqcn=App%5CEntity%5CItinerary&menuIndex=1&signature=Cqn6KED7vWCKJ7iQ_xJwkoa3-aMeSw3ClJRChiQFAlo&submenuIndex=3"
+    "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CItineraryCrudController&entityFqcn=App%5CEntity%5CItinerary&menuIndex=1&signature=Cqn6KED7vWCKJ7iQ_xJwkoa3-aMeSw3ClJRChiQFAlo&submenuIndex=3"
   );
 
   const itinerarioNombre = `Itinerario Playwright ${Date.now()}`;

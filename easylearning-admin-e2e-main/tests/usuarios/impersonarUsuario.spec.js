@@ -8,7 +8,7 @@ test("Impersonar usuario existente", async ({ adminUser, page, context }) => {
 
   // 1️⃣ Navegar a la lista de usuarios
   await page.goto(
-    "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
+    "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
   );
 
   // 2️⃣ Entrar al detalle del usuario

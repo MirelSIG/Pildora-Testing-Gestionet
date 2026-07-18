@@ -13,7 +13,7 @@ test("Crear y eliminar un filtro de categoría con nombre autogenerado", async (
 
   // Paso 1: Navega directamente a la página de categorías
   await page.goto(
-    "https://dev-easylearning.gestionetdev.com/admin?menuIndex=1&routeName=admin-course-categories-page&signature=L2GfUbx3OBTLumHAYryAjG8gxagTAbDbVbZ4IbGew8A&submenuIndex=0&activeRoute=Home&activeParams=JTdCJTdE&routeStatus=JTVCJTdCJTIycm91dGVOYW1lJTIyOiUyMkhvbWUlMjIsJTIycGFyYW1zJTIyOiU3QiUyMmxpbmtOYW1lJTIyOiUyMkNhdGVnb3IlQzMlQURhcyUyMiwlMjJwYXJhbXMlMjI6JTdCJTdEJTdEJTdEJTVE&routeHistory=JTVCJTVE"
+    "/admin?menuIndex=1&routeName=admin-course-categories-page&signature=L2GfUbx3OBTLumHAYryAjG8gxagTAbDbVbZ4IbGew8A&submenuIndex=0&activeRoute=Home&activeParams=JTdCJTdE&routeStatus=JTVCJTdCJTIycm91dGVOYW1lJTIyOiUyMkhvbWUlMjIsJTIycGFyYW1zJTIyOiU3QiUyMmxpbmtOYW1lJTIyOiUyMkNhdGVnb3IlQzMlQURhcyUyMiwlMjJwYXJhbXMlMjI6JTdCJTdEJTdEJTdEJTVE&routeHistory=JTVCJTVE"
   );
 
   // Paso 2: Accede a la sección "Gestión de usuarios"

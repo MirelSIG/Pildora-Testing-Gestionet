@@ -4,7 +4,7 @@ import { expect } from '@playwright/test';
 const test = courseFixtures;
 
 test("Crear y eliminar un curso (no se guarda)", async ({ cursoName, page }) => {
-  await page.goto("https://dev-easylearning.gestionetdev.com/admin");
+  await page.goto("/admin");
   await page.getByRole("link", { name: "Cursos", exact: true }).click();
 
   // Verifica que el curso creado por la fixture aparece en la lista

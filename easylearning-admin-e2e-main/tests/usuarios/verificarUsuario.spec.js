@@ -10,7 +10,7 @@ test.describe("Verificación de usuarios", () => {
   test("✅ Verificar que un usuario EXISTENTE aparece en la tabla", async ({ adminUser, page }) => {
     // Accede a la vista del listado de usuarios en el administrador
     await page.goto(
-      "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
+      "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
     );
 
     const usuarioExistente = "playwright777@user.com"; // Usuario que se espera encontrar en la tabla
@@ -22,7 +22,7 @@ test.describe("Verificación de usuarios", () => {
   test("❌ Verificar que un usuario INEXISTENTE NO aparece en la tabla", async ({ adminUser, page }) => {
     // Accede a la vista del listado de usuarios en el administrador
     await page.goto(
-      "https://dev-easylearning.gestionetdev.com/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
+      "/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CUserCrudController&entityFqcn=App%5CEntity%5CUser&menuIndex=3&signature=A03oO_ntkJkhkqTygnpHw7EQcFgxqIBlh3__yvEWXKo&submenuIndex=0"
     );
 
     const usuarioInexistente = "usuario_que_no_existe@user.com"; // Usuario que NO debería estar en la tabla

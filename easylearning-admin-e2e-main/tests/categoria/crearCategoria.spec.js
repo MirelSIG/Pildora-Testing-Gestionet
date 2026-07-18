@@ -5,7 +5,7 @@ test("Crear y eliminar una categoría (no se guarda)", async ({ adminUser, page 
   const nombreCategoria = `PlaywrightCategoria-${Date.now()}`;
 
   // Navegar a la página de categorías
-  await page.goto("https://dev-easylearning.gestionetdev.com/admin?menuIndex=1&routeName=admin-course-categories-page");
+  await page.goto("/admin?menuIndex=1&routeName=admin-course-categories-page");
 
   // Abrir formulario
   await page.getByRole('link', { name: 'Crear categoría' }).click();
