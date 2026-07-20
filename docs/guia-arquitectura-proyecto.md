@@ -74,7 +74,7 @@ cualquiera —o cualquier agente— ejecuta exactamente el mismo entorno.
 No es parte de la demo gamificada — es un proyecto Playwright independiente
 (pruebas del panel de administración de EasyLearning: login, usuarios,
 cursos, categorías, itinerarios, filtros). Sirve como **referencia de
-estructura real de Gestionet**: fixtures reutilizables, `utils/` con helpers,
+estructura simulada de Gestionet**: fixtures reutilizables, `utils/` con helpers,
 tests organizados por dominio. Los agentes de QA están escritos pensando en
 que también podrían operar sobre proyectos con esta forma, no solo sobre
 `demo-playwright`.
