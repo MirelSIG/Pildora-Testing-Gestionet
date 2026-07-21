@@ -4,7 +4,7 @@
 
 Este documento explica, de forma sencilla, el proceso que segui para comprender el proceso de testing a partir de una demo para el departamento QA de Gestionet.
 
-La idea principal es esta:
+El proceso se puede resumir en tres pasos:
 
 - primero construi una demo de testing automatizado con Playwright,
 - despues la hice reproducible con Docker,
