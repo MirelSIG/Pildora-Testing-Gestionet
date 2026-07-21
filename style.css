@@ -1,3 +1,5 @@
+/* Estilos del catalogo de herramientas de testing (index.html de la raiz) */
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   margin: 0;
@@ -6,6 +8,7 @@ body {
   color: #222;
 }
 
+/* Cabecera superior con el titulo del catalogo */
 header {
   background: #1f3b6f;
   color: #fff;
@@ -36,6 +39,7 @@ main {
   margin: 0 auto;
 }
 
+/* Tarjeta contenedora de cada seccion tematica del catalogo */
 section {
   margin-bottom: 32px;
   background: #fff;
@@ -70,6 +74,7 @@ li {
   margin-bottom: 4px;
 }
 
+/* Tabla comparativa de herramientas */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -127,6 +132,7 @@ table tr:hover {
   transition: background-color 0.2s ease-in-out;
 }
 
+/* Bloque de ejemplo de codigo dentro de cada seccion */
 .demo-block {
   margin-top: 14px;
   border: 1px solid #d7deef;
@@ -140,6 +146,7 @@ table tr:hover {
   color: #17325f;
 }
 
+/* Bloque <pre><code> con el snippet de codigo (tema oscuro) */
 .demo-code {
   margin: 0;
   background: #0f172a;

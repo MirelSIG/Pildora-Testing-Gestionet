@@ -1,3 +1,5 @@
+// Test E2E: localiza un usuario ya existente, edita nombre/apellido/idioma/estado
+// y verifica que los cambios se reflejan en el listado tras guardar.
 import { userFixtures } from '../../fixtures/user.fixture.js';
 import { expect } from '@playwright/test';
 import { buscarEnTabla } from "../../utils/utils.js";

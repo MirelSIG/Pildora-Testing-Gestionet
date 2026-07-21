@@ -1,3 +1,5 @@
+// Test E2E: crea un usuario con datos unicos desde el panel de admin,
+// comprueba que aparece en el listado y lo elimina para dejar el entorno limpio.
 import { userFixtures } from '../../fixtures/user.fixture.js';
 import { expect } from '@playwright/test';
 import { buscarEnTabla } from "../../utils/utils.js";

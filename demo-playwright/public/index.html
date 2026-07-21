@@ -13,24 +13,29 @@
   </header>
 
   <main>
+    <!-- Pantalla inicial: el alumno introduce su nombre para empezar el quiz -->
     <section id="pantalla-login">
       <label for="input-usuario">Nombre de alumno</label>
       <input id="input-usuario" type="text" placeholder="ej. ana.garcia" data-testid="input-usuario" />
       <button id="btn-empezar" data-testid="btn-empezar">Empezar quiz</button>
     </section>
 
+    <!-- Pantalla del quiz: se muestra tras pulsar "Empezar quiz" (oculta por defecto) -->
     <section id="pantalla-quiz" hidden>
+      <!-- Barra de progreso que se actualiza segun avanzan las preguntas -->
       <div class="progreso-bar-wrapper">
         <div id="progreso-bar" class="progreso-bar" data-testid="progreso-bar"></div>
       </div>
       <p data-testid="contador-preguntas">Pregunta <span id="num-pregunta">1</span> de <span id="total-preguntas">3</span></p>
 
+      <!-- La pregunta y sus opciones se rellenan dinamicamente desde app.js -->
       <h2 id="texto-pregunta" data-testid="texto-pregunta"></h2>
       <div id="opciones" data-testid="opciones"></div>
 
       <p id="puntos-actuales" data-testid="puntos-actuales">Puntos: 0</p>
     </section>
 
+    <!-- Pantalla final: puntuacion y badge obtenida al completar el quiz -->
     <section id="pantalla-resultado" hidden>
       <h2>Quiz completado</h2>
       <p id="resultado-puntos" data-testid="resultado-puntos"></p>
@@ -39,6 +44,7 @@
     </section>
   </main>
 
+  <!-- Logica de interaccion del quiz -->
   <script src="app.js"></script>
 </body>
 </html>

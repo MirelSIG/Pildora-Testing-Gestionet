@@ -1,3 +1,5 @@
+/* Estilos de la demo del quiz gamificado (tema oscuro) */
+
 body {
   font-family: system-ui, sans-serif;
   max-width: 640px;
@@ -15,6 +17,7 @@ h1 {
   color: #38bdf8;
 }
 
+/* Tarjeta contenedora de cada pantalla (login, quiz, resultado) */
 section {
   background: #1e293b;
   border-radius: 12px;
@@ -42,6 +45,7 @@ button {
   font-weight: 600;
 }
 
+/* Boton de cada opcion de respuesta del quiz */
 .opcion-btn {
   display: block;
   width: 100%;
@@ -55,6 +59,7 @@ button {
   background: #475569;
 }
 
+/* Contenedor (pista) de la barra de progreso de preguntas */
 .progreso-bar-wrapper {
   height: 8px;
   background: #334155;
@@ -63,6 +68,7 @@ button {
   margin-bottom: 1rem;
 }
 
+/* Relleno de la barra de progreso, cuyo ancho se actualiza via JS */
 .progreso-bar {
   height: 100%;
   width: 0%;
@@ -70,6 +76,7 @@ button {
   transition: width 0.3s ease;
 }
 
+/* Texto destacado con la badge (medalla) obtenida al finalizar */
 .badge {
   font-size: 1.4rem;
   font-weight: 700;

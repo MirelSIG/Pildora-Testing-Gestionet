@@ -4,7 +4,8 @@ import { buscarEnTabla } from "../../utils/utils";       // Función utilitaria 
 
 const test = userFixtures;
 
-// Agrupa los tests bajo el mismo contexto
+// Suite que comprueba, en positivo y en negativo, la busqueda de usuarios
+// en la tabla paginada del listado de administracion.
 test.describe("Verificación de usuarios", () => {
 
   test("✅ Verificar que un usuario EXISTENTE aparece en la tabla", async ({ adminUser, page }) => {

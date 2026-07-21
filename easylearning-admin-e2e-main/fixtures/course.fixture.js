@@ -1,8 +1,10 @@
+// Fixture que, ademas de loguear como admin, crea un curso de prueba listo para usar.
 import { userFixtures } from './user.fixture.js';
 
 export const courseFixtures = userFixtures.extend({
+  // Extiende la fixture de admin creando un curso con nombre unico (timestamp) y lo expone
   cursoName: async ({ page, adminUser }, use) => {
-    const nombreCurso = `Curso Playwright ${Date.now()}`;
+    const nombreCurso = `Curso Playwright ${Date.now()}`; // Timestamp evita colisiones entre ejecuciones
 
     await page.goto('/admin');
     await page.getByRole('link', { name: 'Cursos', exact: true }).click();

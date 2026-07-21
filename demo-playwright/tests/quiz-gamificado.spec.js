@@ -6,11 +6,14 @@ const { resetDb, getDb } = require('../db/database');
 // UI gamificada (Playwright) + persistencia de puntos/badges en BBDD
 // (la misma tabla que se inspeccionaria manualmente con Navicat).
 
+// Antes de cada test se vacia la BBDD para que los tests sean independientes entre si
 test.beforeEach(() => {
   resetDb();
 });
 
 test.describe('Quiz gamificado - flujo completo', () => {
+  // Caso feliz: acertando las 3 preguntas se obtiene 100 puntos y badge Oro,
+  // y ese resultado debe quedar reflejado correctamente en las tablas de la BBDD
   test('un alumno que acierta todas las preguntas obtiene la badge Oro y queda persistido en BBDD', async ({ page }) => {
     const alumno = 'ana.garcia';
 
@@ -41,6 +44,7 @@ test.describe('Quiz gamificado - flujo completo', () => {
     db.close();
   });
 
+  // Caso pesimista: fallando todas las preguntas se obtienen 0 puntos y badge Bronce
   test('un alumno que falla todas las preguntas obtiene la badge Bronce', async ({ page }) => {
     const alumno = 'luis.perez';
 
@@ -56,21 +60,23 @@ test.describe('Quiz gamificado - flujo completo', () => {
     await expect(page.getByTestId('resultado-badge')).toHaveText('Badge obtenida: Bronce');
   });
 
+  // Comprueba que el ancho de la barra de progreso (en %) se actualiza tras responder
   test('la barra de progreso avanza en cada pregunta respondida', async ({ page }) => {
     await page.goto('/');
     await page.getByTestId('input-usuario').fill('progreso.test');
     await page.getByTestId('btn-empezar').click();
 
-    await expect(page.getByTestId('progreso-bar')).toHaveCSS('width', '0px');
+    await expect(page.getByTestId('progreso-bar')).toHaveCSS('width', '0px'); // Aun no se ha respondido nada
 
     await page.getByTestId('opcion-1').click();
     const anchoTrasPregunta1 = await page.getByTestId('progreso-bar').evaluate((el) => el.style.width);
-    expect(anchoTrasPregunta1).toBe('33%');
+    expect(anchoTrasPregunta1).toBe('33%'); // 1 de 3 preguntas respondidas
   });
 
+  // Test de contrato de la API: debe validar el body y rechazar datos incompletos con 400
   test('la API rechaza datos invalidos al guardar el progreso', async ({ request }) => {
     const response = await request.post('/api/quiz/completar', {
-      data: { usuario: '', modulo: 'fundamentos-testing', aciertos: 1 },
+      data: { usuario: '', modulo: 'fundamentos-testing', aciertos: 1 }, // falta totalPreguntas y usuario vacio
     });
     expect(response.status()).toBe(400);
   });

@@ -1,3 +1,5 @@
+// Test E2E: crea una categoria de curso desde el panel de admin y la elimina
+// a continuacion para no dejar datos residuales en el entorno (no se guarda).
 import { userFixtures as test } from '../../fixtures/user.fixture.js';
 
 test("Crear y eliminar una categoría (no se guarda)", async ({ adminUser, page }) => {

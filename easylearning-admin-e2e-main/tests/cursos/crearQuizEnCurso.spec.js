@@ -1,3 +1,5 @@
+// Test E2E: sobre el curso creado por la fixture, añade un capitulo de tipo Quiz
+// con dos preguntas y despues elimina el curso para no dejar datos residuales.
 import { courseFixtures } from '../../fixtures/course.fixture.js';
 import { expect } from '@playwright/test';
 
@@ -5,7 +7,7 @@ const test = courseFixtures;
 
 test("Crear quiz en curso playwright - versión limpia", async ({ adminUser, page, cursoName }) => {
 
-  const modalQuiz = page.locator("#questions-games");
+  const modalQuiz = page.locator("#questions-games"); // Modal donde se redactan las preguntas del quiz
 
   // Función para crear una pregunta en el quiz
   const crearPregunta = async (enunciado, respuestas, correctaIndex, forceClick = false) => {
@@ -64,4 +66,4 @@ test("Crear quiz en curso playwright - versión limpia", async ({ adminUser, pag
   await filaCurso.waitFor({ state: 'detached', timeout: 10000 });
   console.log("✔️ Curso eliminado correctamente");
 
-}, { timeout: 60000 });
+}, { timeout: 60000 }); // Timeout ampliado: el test crea varias entidades y su limpieza es lenta

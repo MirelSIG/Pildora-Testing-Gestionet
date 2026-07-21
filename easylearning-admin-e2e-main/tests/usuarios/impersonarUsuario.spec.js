@@ -1,3 +1,5 @@
+// Test E2E: como administrador, impersona a un usuario existente y verifica
+// que la nueva pestaña abierta carga correctamente el campus del alumno.
 import { userFixtures } from '../../fixtures/user.fixture.js';
 import { expect } from '@playwright/test';
 

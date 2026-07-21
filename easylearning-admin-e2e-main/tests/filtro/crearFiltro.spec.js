@@ -1,3 +1,5 @@
+// Test E2E de la seccion "Gestion de usuarios > Filtros": crea un filtro con
+// un subfiltro asociado y despues lo elimina para no dejar datos residuales.
 import { userFixtures } from '../../fixtures/user.fixture.js';
 import { expect } from '@playwright/test';
 

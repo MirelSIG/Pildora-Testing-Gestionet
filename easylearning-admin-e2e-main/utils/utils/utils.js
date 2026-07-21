@@ -19,6 +19,7 @@ export async function buscarEnTabla(
 ) {
   let paginaActual = 1;
 
+  // Recorre las paginas de la tabla hasta encontrar el texto o agotar el limite
   while (paginaActual <= maxPaginas) {
     console.log(`🔹 Buscando "${textoBuscado}" en la página ${paginaActual}...`);
 
@@ -58,5 +59,6 @@ export async function buscarEnTabla(
     paginaActual++;
   }
 
+  // Se agotaron las paginas (o no habia boton "Siguiente") sin encontrar el texto
   throw new Error(`El texto "${textoBuscado}" no se encontró en ninguna página`);
 }

@@ -1,3 +1,5 @@
+// Test E2E: la fixture course.fixture.js ya crea el curso; aqui se comprueba
+// que aparece en el listado y se elimina para dejar el entorno limpio.
 import { courseFixtures } from '../../fixtures/course.fixture.js';
 import { expect } from '@playwright/test';
 
@@ -12,7 +14,7 @@ test("Crear y eliminar un curso (no se guarda)", async ({ cursoName, page }) => 
   await expect(filaCurso).toBeVisible({ timeout: 10000 });
 
   // Obtiene el ID de la fila para abrir el menú correspondiente
-  const idCurso = await filaCurso.locator('td >> nth=0').innerText(); // Ajusta si tu ID está en otra columna
+  const idCurso = await filaCurso.locator('td >> nth=0').innerText(); // Ajusta si el ID está en otra columna
   const botonMenu = page.locator(`#dropdown-menu-${idCurso}`);
   
   await expect(botonMenu).toBeVisible({ timeout: 5000 });

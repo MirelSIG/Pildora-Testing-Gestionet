@@ -1,3 +1,5 @@
+// Test E2E: crea un itinerario formativo, lo localiza en el listado paginado
+// (usando el helper buscarEnTabla) y a continuacion lo elimina.
 import { userFixtures } from '../../fixtures/user.fixture.js';
 import { expect } from '@playwright/test';
 import { buscarEnTabla } from "../../utils/utils.js";
