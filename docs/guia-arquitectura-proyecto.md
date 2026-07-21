@@ -1,8 +1,8 @@
-# Guía: cómo se articula el repositorio
+# Guía: cómo se articula el proyecto demo
 
 Esta guía explica cómo encajan entre sí las piezas del repositorio: la píldora
 formativa original, la demo técnica de Playwright, la reproducibilidad con
-Docker, la suite E2E de simulación de Admin (`easylearning-admin-e2e-main`) y los agentes de QA.
+Docker, la suite E2E real (`easylearning-admin-e2e-main`) y los agentes de QA.
 Léela de arriba a abajo: cada capa se apoya en la anterior.
 
 ## 1. Vista general en una frase
@@ -25,7 +25,8 @@ Contenido teórico          Demo funcional              Reproducibilidad      Me
 | 1 | Contenido formativo | [index.html](../index.html), [README.md](../README.md) | Explica *qué* herramientas de testing existen y cuándo usarlas (PHPUnit, Playwright, Navicat, etc.) |
 | 2 | Demo funcional | [demo-playwright/](../demo-playwright/) | Aplica esa teoría: un curso gamificado real (quiz → puntos → badge → BBDD) probado con Playwright |
 | 3 | Reproducibilidad | [docker-compose.yml](../docker-compose.yml), `demo-playwright/Dockerfile*` | Empaqueta la demo para que se ejecute igual en cualquier máquina |
-| 4 | Suite E2E de referencia | [easylearning-admin-e2e-main/](../easylearning-admin-e2e-main/) | Ejemplo de un proyecto Playwright "simulado" de Gestionet (panel admin), usado como referencia de estructura (fixtures/tests/utils) |
+<<<<<<< HEAD
+| 4 | Suite E2E de referencia | [easylearning-admin-e2e-main/](../easylearning-admin-e2e-main/) | Ejemplo de un proyecto Playwright "real" de Gestionet (panel admin), usado como referencia de estructura (fixtures/tests/utils) |
 | 5 | Metodología con agentes | [.claude/agents/](../.claude/agents/), [.github/skills/testing-gestionet/SKILL.md](../.github/skills/testing-gestionet/SKILL.md) | Convierte "ejecutar tests" en un proceso con tres roles: ejecutar → analizar → reportar |
 
 ## 3. Capa 2 en detalle: `demo-playwright/`
@@ -74,7 +75,8 @@ cualquiera —o cualquier agente— ejecuta exactamente el mismo entorno.
 No es parte de la demo gamificada — es un proyecto Playwright independiente
 (pruebas del panel de administración de EasyLearning: login, usuarios,
 cursos, categorías, itinerarios, filtros). Sirve como **referencia de
-estructura simulada de Gestionet**: fixtures reutilizables, `utils/` con helpers,
+<<<<<<< HEAD
+estructura real de Gestionet**: fixtures reutilizables, `utils/` con helpers,
 tests organizados por dominio. Los agentes de QA están escritos pensando en
 que también podrían operar sobre proyectos con esta forma, no solo sobre
 `demo-playwright`.
@@ -130,7 +132,8 @@ la describe en texto.
 | Ver/ejecutar la demo funcional | [demo-playwright/README.md](../demo-playwright/README.md) |
 | Ejecutar todo en un entorno reproducible | `docker compose up --build -d` (raíz del repo) |
 | Ejecutar solo los tests, aislados | `docker compose --profile tests run --rm demo-playwright-tests` |
-| Ver un proyecto Playwright "simulado" de Gestionet como referencia | [easylearning-admin-e2e-main/README.md](../easylearning-admin-e2e-main/README.md) |
+<<<<<<< HEAD
+| Ver un proyecto Playwright "real" de Gestionet como referencia | [easylearning-admin-e2e-main/README.md](../easylearning-admin-e2e-main/README.md) |
 | Que un agente ejecute/analice/reporte QA | `.claude/agents/qa-executor.md`, `qa-analyst.md`, `qa-reporter.md` |
 | Entender el método de trabajo QA completo | [.github/skills/testing-gestionet/SKILL.md](../.github/skills/testing-gestionet/SKILL.md) |
 | Presentar el proyecto a Gestionet | [docs/presentacion-qa-gestionet.md](presentacion-qa-gestionet.md) |

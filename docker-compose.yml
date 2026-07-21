@@ -11,6 +11,12 @@ services:
       - "4173:4173"
     volumes:
       - gestionet_demo_data:/data
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4173').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1));"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
     restart: unless-stopped
 
   demo-playwright-tests:
@@ -18,11 +24,17 @@ services:
     build:
       context: ./demo-playwright
       dockerfile: Dockerfile.tests
+    depends_on:
+      demo-playwright:
+        condition: service_healthy
     environment:
       CI: "1"
-      DB_PATH: /tmp/gestionet_demo.db
+      DB_PATH: /data/gestionet_demo.db
+      PLAYWRIGHT_BASE_URL: http://demo-playwright:4173
+      PLAYWRIGHT_USE_EXTERNAL_SERVER: "1"
     command: npm test
     volumes:
+      - gestionet_demo_data:/data
       - ./demo-playwright/playwright-report:/app/playwright-report
       - ./demo-playwright/test-results:/app/test-results
 

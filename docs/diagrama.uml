@@ -1,0 +1,30 @@
+@startuml
+title Flujo del fixture cursoName
+
+start
+
+:Generar nombre único del curso;
+note right
+nombreCurso = "Curso Playwright " + Date.now()
+end note
+
+:Ir a /admin;
+:Click en enlace "Cursos";
+:Click en botón "Crear curso";
+
+:Rellenar campo #name con nombreCurso;
+:Rellenar campo #code con "Código temporal";
+:Seleccionar opción "Teleformación" en #typeCourse;
+:Seleccionar opción "General" en #category;
+:Click en botón "1h";
+
+:Enviar formulario (#new-course-form-btn-submit);
+:Esperar estado networkidle;
+
+:Exponer nombre del curso al test;
+note right
+use(nombreCurso)
+end note
+
+stop
+@enduml

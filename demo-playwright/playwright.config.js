@@ -2,6 +2,9 @@
 // Configuracion de Playwright para la demo (backend + frontend propios).
 const { defineConfig, devices } = require('@playwright/test');
 
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:4173';
+const useExternalServer = process.env.PLAYWRIGHT_USE_EXTERNAL_SERVER === '1';
+
 module.exports = defineConfig({
   testDir: './tests', // Carpeta donde viven los specs
   fullyParallel: false, // Los tests comparten la misma BD, se ejecutan en serie
@@ -10,9 +13,9 @@ module.exports = defineConfig({
   reporter: [['html', { open: 'never' }], ['list']], // Informe HTML (sin abrir navegador) + salida por consola
 
   use: {
-    baseURL: 'http://localhost:4173', // URL base servida por server.js
-    trace: 'on-first-retry', // Guarda traza solo si un test falla y se reintenta
-    screenshot: 'only-on-failure', // Captura de pantalla solo cuando falla el test
+    baseURL,
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
   },
 
   // Navegadores/motores contra los que se ejecuta la suite
@@ -24,10 +27,12 @@ module.exports = defineConfig({
 
   // Playwright levanta automaticamente el backend + frontend antes de ejecutar
   // los tests, igual que haria un pipeline de CI/CD.
-  webServer: {
-    command: 'node server.js',
-    url: 'http://localhost:4173',
-    reuseExistingServer: !process.env.CI,
-    timeout: 15000,
-  },
+  webServer: useExternalServer
+    ? undefined
+    : {
+        command: 'node server.js',
+        url: baseURL,
+        reuseExistingServer: !process.env.CI,
+        timeout: 15000,
+      },
 });

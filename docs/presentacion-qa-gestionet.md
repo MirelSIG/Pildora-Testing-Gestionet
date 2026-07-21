@@ -2,7 +2,7 @@
 
 ## Proposito del documento
 
-Este documento explica, de forma sencilla, el proceso que segui para comprender el proceso de testing a partir de una demo para el departamento QA de Gestionet.
+Este documento explica, de forma sencilla, el proceso que segui para transformar una necesidad de testing en una propuesta de trabajo reutilizable para el departamento QA de Gestionet.
 
 La idea principal es esta:
 
@@ -111,7 +111,8 @@ Esto replica un flujo real de trabajo QA:
 2. analizar,
 3. informar.
 
-## Por que esto es util para cualquier departamento QA
+<<<<<<< HEAD
+## Por que esto es util para el departamento QA
 
 La utilidad principal no esta solo en automatizar una prueba, sino en estandarizar una manera de trabajar.
 
@@ -130,7 +131,8 @@ La utilidad principal no esta solo en automatizar una prueba, sino en estandariz
 - Los fallos se clasifican con criterio.
 - Se puede distinguir entre problema de UI, API, base de datos o configuracion.
 
-### Beneficio para Empresas
+<<<<<<< HEAD
+### Beneficios para Gestionet
 
 En una empresa como Gestionet, donde puede haber productos digitales con logica de negocio, interfaces interactivas y validacion de datos, este enfoque ayuda a:
 
@@ -205,4 +207,4 @@ Eso permite presentar ante Gestionet que las practicas profesionales no consisti
 
 ## Mensaje final para la presentacion
 
-"Durante mis practicas en QA no solo ejecute pruebas automatizadas. Primero construi una demo realista con Playwright, despues la hice reproducible con Docker para evitar errores de entorno y finalmente, converti el proceso en una plantilla de agentes de IA que permite ejecutar, analizar y reportar tareas de testing de forma rapida, ordenada y profesional"
+"Durante mis practicas en QA no solo ejecute pruebas automatizadas. Primero construye una demo realista con Playwright, despues la hice reproducible con Docker para evitar errores de entorno, y finalmente converti el proceso en una plantilla de agentes de IA que permite ejecutar, analizar y reportar tareas de testing de forma mas rapida, ordenada y profesional."

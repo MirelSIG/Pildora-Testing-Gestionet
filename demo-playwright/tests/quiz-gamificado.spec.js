@@ -12,39 +12,6 @@ test.beforeEach(() => {
 });
 
 test.describe('Quiz gamificado - flujo completo', () => {
-  // Caso feliz: acertando las 3 preguntas se obtiene 100 puntos y badge Oro,
-  // y ese resultado debe quedar reflejado correctamente en las tablas de la BBDD
-  test('un alumno que acierta todas las preguntas obtiene la badge Oro y queda persistido en BBDD', async ({ page }) => {
-    const alumno = 'ana.garcia';
-
-    await page.goto('/');
-    await page.getByTestId('input-usuario').fill(alumno);
-    await page.getByTestId('btn-empezar').click();
-
-    // Respuestas correctas segun public/app.js: Playwright, Navicat, Vitest
-    await page.getByTestId('opcion-1').click(); // Pregunta 1
-    await page.getByTestId('opcion-0').click(); // Pregunta 2
-    await page.getByTestId('opcion-2').click(); // Pregunta 3
-
-    await expect(page.getByTestId('resultado-puntos')).toHaveText('Puntuacion final: 100 puntos');
-    await expect(page.getByTestId('resultado-badge')).toHaveText('Badge obtenida: Oro');
-
-    // Validacion de integridad de datos en BBDD (equivalente a revisar la tabla en Navicat)
-    const db = getDb();
-    const usuario = db.prepare('SELECT * FROM usuarios WHERE nombre = ?').get(alumno);
-    expect(usuario).toBeTruthy();
-
-    const progreso = db.prepare('SELECT * FROM progreso_modulo WHERE usuario_id = ?').get(usuario.id);
-    expect(progreso.puntos).toBe(100);
-    expect(progreso.aciertos).toBe(3);
-    expect(progreso.completado).toBe(1);
-
-    const badge = db.prepare('SELECT * FROM badges WHERE usuario_id = ?').get(usuario.id);
-    expect(badge.nombre_badge).toBe('Oro');
-    db.close();
-  });
-
-  // Caso pesimista: fallando todas las preguntas se obtienen 0 puntos y badge Bronce
   test('un alumno que falla todas las preguntas obtiene la badge Bronce', async ({ page }) => {
     const alumno = 'luis.perez';
 
@@ -79,5 +46,35 @@ test.describe('Quiz gamificado - flujo completo', () => {
       data: { usuario: '', modulo: 'fundamentos-testing', aciertos: 1 }, // falta totalPreguntas y usuario vacio
     });
     expect(response.status()).toBe(400);
+  });
+
+  test('un alumno que acierta todas las preguntas obtiene la badge Oro y queda persistido en BBDD', async ({ page }) => {
+    const alumno = 'ana.garcia';
+
+    await page.goto('/');
+    await page.getByTestId('input-usuario').fill(alumno);
+    await page.getByTestId('btn-empezar').click();
+
+    // Respuestas correctas segun public/app.js: Playwright, Navicat, Vitest
+    await page.getByTestId('opcion-1').click(); // Pregunta 1
+    await page.getByTestId('opcion-0').click(); // Pregunta 2
+    await page.getByTestId('opcion-2').click(); // Pregunta 3
+
+    await expect(page.getByTestId('resultado-puntos')).toHaveText('Puntuacion final: 100 puntos');
+    await expect(page.getByTestId('resultado-badge')).toHaveText('Badge obtenida: Oro');
+
+    // Validacion de integridad de datos en BBDD (equivalente a revisar la tabla en Navicat)
+    const db = getDb();
+    const usuario = db.prepare('SELECT * FROM usuarios WHERE nombre = ?').get(alumno);
+    expect(usuario).toBeTruthy();
+
+    const progreso = db.prepare('SELECT * FROM progreso_modulo WHERE usuario_id = ?').get(usuario.id);
+    expect(progreso.puntos).toBe(100);
+    expect(progreso.aciertos).toBe(3);
+    expect(progreso.completado).toBe(1);
+
+    const badge = db.prepare('SELECT * FROM badges WHERE usuario_id = ?').get(usuario.id);
+    expect(badge.nombre_badge).toBe('Oro');
+    db.close();
   });
 });
