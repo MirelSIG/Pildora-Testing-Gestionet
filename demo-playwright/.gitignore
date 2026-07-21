@@ -3,3 +3,4 @@ test-results/
 playwright-report/
 db/gestionet_demo.db
 db/gestionet_demo.db-*
+.DS_Store
