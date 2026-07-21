@@ -111,7 +111,6 @@ Esto replica un flujo real de trabajo QA:
 2. analizar,
 3. informar.
 
-<<<<<<< HEAD
 ## Por que esto es util para el departamento QA
 
 La utilidad principal no esta solo en automatizar una prueba, sino en estandarizar una manera de trabajar.
@@ -131,7 +130,6 @@ La utilidad principal no esta solo en automatizar una prueba, sino en estandariz
 - Los fallos se clasifican con criterio.
 - Se puede distinguir entre problema de UI, API, base de datos o configuracion.
 
-<<<<<<< HEAD
 ### Beneficios para Gestionet
 
 En una empresa como Gestionet, donde puede haber productos digitales con logica de negocio, interfaces interactivas y validacion de datos, este enfoque ayuda a:

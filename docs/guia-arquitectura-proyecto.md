@@ -25,7 +25,6 @@ Contenido teórico          Demo funcional              Reproducibilidad      Me
 | 1 | Contenido formativo | [index.html](../index.html), [README.md](../README.md) | Explica *qué* herramientas de testing existen y cuándo usarlas (PHPUnit, Playwright, Navicat, etc.) |
 | 2 | Demo funcional | [demo-playwright/](../demo-playwright/) | Aplica esa teoría: un curso gamificado real (quiz → puntos → badge → BBDD) probado con Playwright |
 | 3 | Reproducibilidad | [docker-compose.yml](../docker-compose.yml), `demo-playwright/Dockerfile*` | Empaqueta la demo para que se ejecute igual en cualquier máquina |
-<<<<<<< HEAD
 | 4 | Suite E2E de referencia | [easylearning-admin-e2e-main/](../easylearning-admin-e2e-main/) | Ejemplo de un proyecto Playwright "real" de Gestionet (panel admin), usado como referencia de estructura (fixtures/tests/utils) |
 | 5 | Metodología con agentes | [.claude/agents/](../.claude/agents/), [.github/skills/testing-gestionet/SKILL.md](../.github/skills/testing-gestionet/SKILL.md) | Convierte "ejecutar tests" en un proceso con tres roles: ejecutar → analizar → reportar |
 
@@ -75,7 +74,6 @@ cualquiera —o cualquier agente— ejecuta exactamente el mismo entorno.
 No es parte de la demo gamificada — es un proyecto Playwright independiente
 (pruebas del panel de administración de EasyLearning: login, usuarios,
 cursos, categorías, itinerarios, filtros). Sirve como **referencia de
-<<<<<<< HEAD
 estructura real de Gestionet**: fixtures reutilizables, `utils/` con helpers,
 tests organizados por dominio. Los agentes de QA están escritos pensando en
 que también podrían operar sobre proyectos con esta forma, no solo sobre
@@ -132,7 +130,6 @@ la describe en texto.
 | Ver/ejecutar la demo funcional | [demo-playwright/README.md](../demo-playwright/README.md) |
 | Ejecutar todo en un entorno reproducible | `docker compose up --build -d` (raíz del repo) |
 | Ejecutar solo los tests, aislados | `docker compose --profile tests run --rm demo-playwright-tests` |
-<<<<<<< HEAD
 | Ver un proyecto Playwright "real" de Gestionet como referencia | [easylearning-admin-e2e-main/README.md](../easylearning-admin-e2e-main/README.md) |
 | Que un agente ejecute/analice/reporte QA | `.claude/agents/qa-executor.md`, `qa-analyst.md`, `qa-reporter.md` |
 | Entender el método de trabajo QA completo | [.github/skills/testing-gestionet/SKILL.md](../.github/skills/testing-gestionet/SKILL.md) |
