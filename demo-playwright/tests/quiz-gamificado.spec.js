@@ -1,6 +1,6 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const { resetDb, getDb } = require('../db/database');
+const { resetDb } = require('../db/database');
 
 // Estas pruebas cubren el flujo E2E completo descrito en la pildora:
 // UI gamificada (Playwright) + persistencia de puntos/badges en BBDD
@@ -48,7 +48,7 @@ test.describe('Quiz gamificado - flujo completo', () => {
     expect(response.status()).toBe(400);
   });
 
-  test('un alumno que acierta todas las preguntas obtiene la badge Oro y queda persistido en BBDD', async ({ page }) => {
+  test('un alumno que acierta todas las preguntas obtiene la badge Oro y queda persistido en BBDD', async ({ page, request }) => {
     const alumno = 'ana.garcia';
 
     await page.goto('/');
@@ -63,18 +63,21 @@ test.describe('Quiz gamificado - flujo completo', () => {
     await expect(page.getByTestId('resultado-puntos')).toHaveText('Puntuacion final: 100 puntos');
     await expect(page.getByTestId('resultado-badge')).toHaveText('Badge obtenida: Oro');
 
-    // Validacion de integridad de datos en BBDD (equivalente a revisar la tabla en Navicat)
-    const db = getDb();
-    const usuario = db.prepare('SELECT * FROM usuarios WHERE nombre = ?').get(alumno);
-    expect(usuario).toBeTruthy();
+    // Validacion de integridad de datos en BBDD a traves de la misma API que usa la UI.
+    // Abrir aqui una segunda conexion sqlite directa asumiria que el proceso de test
+    // y el servidor bajo prueba comparten filesystem/DB_PATH, lo cual no se cumple
+    // cuando los tests corren contra un servidor externo (p.ej. el contenedor Docker
+    // levantado por docker-compose), y provocaba falsos negativos de persistencia.
+    const response = await request.get(`/api/usuario/${alumno}/progreso`);
+    const { modulos, badges } = await response.json();
 
-    const progreso = db.prepare('SELECT * FROM progreso_modulo WHERE usuario_id = ?').get(usuario.id);
+    const progreso = modulos.at(-1);
+    expect(progreso).toBeTruthy();
     expect(progreso.puntos).toBe(100);
     expect(progreso.aciertos).toBe(3);
     expect(progreso.completado).toBe(1);
 
-    const badge = db.prepare('SELECT * FROM badges WHERE usuario_id = ?').get(usuario.id);
+    const badge = badges.at(-1);
     expect(badge.nombre_badge).toBe('Oro');
-    db.close();
   });
 });

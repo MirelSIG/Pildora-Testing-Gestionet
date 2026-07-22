@@ -6,11 +6,11 @@ services:
     container_name: gestionet-demo-playwright
     environment:
       PORT: 4173
-      DB_PATH: /data/gestionet_demo.db
+      DB_PATH: /db/gestionet_demo.db
     ports:
       - "4173:4173"
     volumes:
-      - gestionet_demo_data:/data
+      - ./demo-playwright/db:/db
     healthcheck:
       test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:4173').then((res) => { if (!res.ok) process.exit(1); }).catch(() => process.exit(1));"]
       interval: 5s
@@ -29,14 +29,11 @@ services:
         condition: service_healthy
     environment:
       CI: "1"
-      DB_PATH: /data/gestionet_demo.db
+      DB_PATH: /db/gestionet_demo.db
       PLAYWRIGHT_BASE_URL: http://demo-playwright:4173
       PLAYWRIGHT_USE_EXTERNAL_SERVER: "1"
     command: npm test
     volumes:
-      - gestionet_demo_data:/data
+      - ./demo-playwright/db:/db
       - ./demo-playwright/playwright-report:/app/playwright-report
       - ./demo-playwright/test-results:/app/test-results
-
-volumes:
-  gestionet_demo_data:
