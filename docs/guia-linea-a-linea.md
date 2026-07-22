@@ -28,9 +28,10 @@ de uso simple de demo).
 ```
 Línea 6: la ruta del fichero `.db` es configurable por variable de entorno
 (`DB_PATH`). En local apunta junto a este archivo; en Docker se sobreescribe
-para apuntar a `/data/gestionet_demo.db` (volumen) o `/tmp/...` (tests),
-según `docker-compose.yml`. Este mismo fichero es el que se abriría con
-Navicat para inspección manual.
+para apuntar a `/db/gestionet_demo.db`. Ese path `/db` está montado como bind
+mount hacia `./demo-playwright/db`, por lo que el fichero queda visible y
+persistido en la carpeta local del proyecto. Este mismo fichero es el que se
+abriría con Navicat para inspección manual.
 
 ```js
 8   function getDb() {
@@ -95,22 +96,15 @@ es una recompensa, no una métrica de progreso).
 Línea 41: devuelve la conexión abierta para que el llamador la use y la
 cierre.
 
-```js
-44  function resetDb() {
-45    const db = getDb();
-46    db.exec('DELETE FROM badges; DELETE FROM progreso_modulo; DELETE FROM usuarios;');
-47    db.close();
-48  }
-```
-Línea 44-48: vacía las tres tablas (respetando el orden por las claves
-foráneas). La usan los tests en `beforeEach` para que cada test empiece con
-BBDD limpia y no interfiera con los demás.
+Nota actual: `resetDb()` quedó comentada en este archivo y ya no se exporta.
+Se retiró para permitir observar persistencia real entre ejecuciones de la
+demo y de los tests en Docker sin vaciado automático previo.
 
 ```js
-50  module.exports = { getDb, resetDb, DB_PATH };
+50  module.exports = { getDb, DB_PATH };
 ```
-Línea 50: expone las tres funciones/constante — `getDb` la usa `server.js` y
-los tests (para hacer `SELECT` de verificación), `resetDb` solo los tests.
+Línea 50: expone `getDb` y `DB_PATH`. `getDb` lo usa `server.js`; los tests
+ya no abren SQLite directamente, sino que validan persistencia vía API.
 
 ---
 
@@ -254,6 +248,8 @@ vía Playwright `request`.
 ```js
 1   // @ts-check
 2   const { defineConfig, devices } = require('@playwright/test');
+3   const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:4173';
+4   const useExternalServer = process.env.PLAYWRIGHT_USE_EXTERNAL_SERVER === '1';
 4   module.exports = defineConfig({
 5     testDir: './tests',
 6     fullyParallel: false,
@@ -272,12 +268,14 @@ HTML (sin abrirlo automáticamente) y un listado por consola.
 
 ```js
 11    use: {
-12      baseURL: 'http://localhost:4173',
+12      baseURL,
 13      trace: 'on-first-retry',
 14      screenshot: 'only-on-failure',
 15    },
 ```
-Línea 12: permite usar rutas relativas (`page.goto('/')`) en los tests.
+Línea 12: permite usar rutas relativas (`page.goto('/')`) en los tests y
+cambiar el host vía entorno (`PLAYWRIGHT_BASE_URL`) cuando la suite corre en
+Docker contra `http://demo-playwright:4173`.
 Línea 13: graba una traza (timeline navegable) solo cuando un test falla y
 se reintenta — evita el coste de trazar todo siempre. Línea 14: igual con
 capturas de pantalla.
@@ -294,18 +292,19 @@ navegador, usando los perfiles de dispositivo predefinidos de Playwright —
 esto es lo que da la cobertura "multinavegador" mencionada en el README.
 
 ```js
-25    webServer: {
-26      command: 'node server.js',
-27      url: 'http://localhost:4173',
-28      reuseExistingServer: !process.env.CI,
-29      timeout: 15000,
-30    },
+25    webServer: useExternalServer
+26      ? undefined
+27      : {
+28          command: 'node server.js',
+29          url: baseURL,
+30          reuseExistingServer: !process.env.CI,
+31          timeout: 15000,
+32        },
 ```
-Línea 26: antes de correr los tests, Playwright lanza el backend. Línea 27:
-espera a que esa URL responda antes de empezar. Línea 28: en local reutiliza
-un servidor ya corrido (útil en desarrollo iterativo); en CI siempre arranca
-uno nuevo, para no depender de estado previo. Línea 29: si no arranca en 15s,
-falla rápido en vez de colgarse.
+Línea 25-32: en local, Playwright puede levantar `node server.js` como
+`webServer`; en Docker, con `PLAYWRIGHT_USE_EXTERNAL_SERVER=1`, se desactiva
+ese arranque interno para usar el servicio Compose ya levantado. Esto evita
+que el contenedor de tests apunte a una app distinta de la que persiste datos.
 
 ---
 
@@ -313,15 +312,14 @@ falla rápido en vez de colgarse.
 
 Estructura general (sin repetir cada línea, ya documentada por bloques):
 
-- **`test.beforeEach(() => { resetDb(); })`**: antes de cada test, vacía la
-  BBDD — aísla los tests entre sí (evita que un usuario creado en un test
-  contamine el siguiente).
+- **No hay `beforeEach(resetDb)` activo**: está comentado para conservar
+  registros entre ejecuciones y poder inspeccionarlos en `db/gestionet_demo.db`.
 - **Test "badge Oro"**: rellena el nombre, pulsa "Empezar", responde las 3
-  preguntas con los índices correctos (definidos en `public/app.js`),
-  verifica el texto final en pantalla, y luego abre una conexión SQLite
-  propia (`getDb()`) para comprobar con `SELECT` que `usuarios`,
-  `progreso_modulo` y `badges` contienen exactamente lo que la UI mostró.
-  Esta doble verificación (UI + BBDD) es el punto central de la demo.
+  preguntas con los índices correctos (definidos en `public/app.js`), verifica
+  el texto final en pantalla y luego valida persistencia consultando
+  `GET /api/usuario/:nombre/progreso` con `request`.
+  Esta comprobación vía API evita falsos negativos cuando el test y el servidor
+  corren en contenedores distintos.
 - **Test "badge Bronce"**: mismo flujo pero respondiendo mal las 3
   preguntas; solo verifica UI (la cobertura de BBDD ya la da el test
   anterior).
@@ -373,15 +371,15 @@ suite y termina.
 
 ### `docker-compose.yml`
 - **Servicio `demo-playwright`**: construye con el `Dockerfile` normal,
-  publica el puerto `4173:4173`, fija `DB_PATH=/data/gestionet_demo.db` (así
-  la BBDD vive en el volumen `gestionet_demo_data` y sobrevive a recrear el
-  contenedor), y `restart: unless-stopped` para que seune si el host
+  publica el puerto `4173:4173`, fija `DB_PATH=/db/gestionet_demo.db` y monta
+  `./demo-playwright/db:/db` para que la BBDD persista en disco local
+  del repositorio, además de `restart: unless-stopped` para que se reinicie si el host
   reinicia.
 - **Servicio `demo-playwright-tests`**: bajo el perfil `tests` (no arranca
   con `docker compose up` normal, solo con `--profile tests`), usa una
-  BBDD temporal en `/tmp` (no necesita persistir), y monta como volúmenes
-  las carpetas de reportes locales para poder ver los resultados fuera del
-  contenedor tras la ejecución.
+  BBDD compartida en `/db/gestionet_demo.db` (mismo bind mount local) y
+  monta como volúmenes las carpetas de reportes locales para poder ver los
+  resultados fuera del contenedor tras la ejecución.
 
 ---
 

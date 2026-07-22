@@ -45,11 +45,11 @@ function getDb() {
 }
 
 // Vacia todas las tablas, dejando la base de datos lista para un nuevo test.
-function resetDb() {
-  const db = getDb();
-  db.exec('DELETE FROM badges; DELETE FROM progreso_modulo; DELETE FROM usuarios;');
-  db.close();
-}
+// function resetDb() {
+//   const db = getDb();
+//   db.exec('DELETE FROM badges; DELETE FROM progreso_modulo; DELETE FROM usuarios;');
+//   db.close();
+// }
 
 // Se exponen la funcion de acceso, la de reseteo y la ruta del fichero .db
-module.exports = { getDb, resetDb, DB_PATH };
+module.exports = { getDb, DB_PATH };

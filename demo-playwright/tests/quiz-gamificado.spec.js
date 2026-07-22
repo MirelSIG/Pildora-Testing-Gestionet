@@ -1,15 +1,15 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-const { resetDb } = require('../db/database');
+// const { resetDb } = require('../db/database');
 
 // Estas pruebas cubren el flujo E2E completo descrito en la pildora:
 // UI gamificada (Playwright) + persistencia de puntos/badges en BBDD
 // (la misma tabla que se inspeccionaria manualmente con Navicat).
 
 // Antes de cada test se vacia la BBDD para que los tests sean independientes entre si
-test.beforeEach(() => {
-  resetDb();
-});
+// test.beforeEach(() => {
+//   resetDb();
+// });
 
 test.describe('Quiz gamificado - flujo completo', () => {
   test('un alumno que falla todas las preguntas obtiene la badge Bronce', async ({ page }) => {
