@@ -2,8 +2,9 @@
 // Configuracion de Playwright para la demo (backend + frontend propios).
 const { defineConfig, devices } = require('@playwright/test');
 
-const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://localhost:4173';
-const useExternalServer = process.env.PLAYWRIGHT_USE_EXTERNAL_SERVER === '1';
+const isUiMode = process.argv.includes('--ui');
+const baseURL = process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4173';
+const useExternalServer = process.env.PLAYWRIGHT_USE_EXTERNAL_SERVER === '1' && !isUiMode;
 
 module.exports = defineConfig({
   testDir: './tests', // Carpeta donde viven los specs
@@ -14,6 +15,7 @@ module.exports = defineConfig({
 
   use: {
     baseURL,
+    ...(isUiMode ? { headless: false, launchOptions: { slowMo: 250 } } : {}),
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },

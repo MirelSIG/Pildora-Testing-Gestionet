@@ -90,9 +90,12 @@ El reporte HTML y los resultados quedan disponibles en:
 ```bash
 npm test              # todos los navegadores, modo headless
 npm run test:headed   # viendo el navegador
-npm run test:ui       # modo UI interactivo de Playwright
+npm run test:ui       # modo UI interactivo con navegador visible y slow motion
 npm run report        # abre el último informe HTML
 ```
+
+> Nota: `test:ui` siempre levanta el servidor local de la demo para evitar
+> problemas de conexión a localhost cuando existe `PLAYWRIGHT_USE_EXTERNAL_SERVER=1`.
 
 Después de correr `npm start` una vez, puedes abrir `db/gestionet_demo.db`
 con Navicat (conexión SQLite) para ver los registros guardados por el quiz.
